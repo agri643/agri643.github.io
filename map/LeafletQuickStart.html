@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Quick Start - Leaflet</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+
+
+
+</head>
+<body>
+
+
+
+<div id="map" style="width: 100%; height: 900px;"></div>
+<script>
+
+	var map = L.map('map').setView([-36.86163, 174.8658328994817], 14);
+
+	L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+	subdomains: 'abcd',
+	maxZoom: 19
+	}).addTo(map);
+
+	var glendowiecollege = {
+		"type": "Feature",
+		"geometry": {
+			"type": "Polygon",
+			"coordinates": [
+			[
+			[
+				174.8658328994817,
+				-36.85967874285502,
+				0
+			],
+			[
+				174.8658161153424,
+				-36.86071726910828,
+				0
+			],
+			[
+				174.8653125644679,
+				-36.86109997970141,
+				0
+			],
+			[
+				174.8654341575439,
+				-36.86134087341851,
+				0
+			],
+			[
+				174.8654782196842,
+				-36.86157866198936,
+				0
+			],
+			[
+				174.8655983677328,
+				-36.86181890767762,
+				0
+			],
+			[
+				174.8657539936423,
+				-36.86211969484947,
+				0
+			],
+			[
+				174.8660417375162,
+				-36.86248130024474,
+				0
+			],
+			[
+				174.8663014776892,
+				-36.86286184549099,
+				0
+			],
+			[
+				174.8665485660177,
+				-36.86317234490271,
+				0
+			],
+			[
+				174.8666349329406,
+				-36.86334534901742,
+				0
+			],
+			[
+				174.8668133684054,
+				-36.86405612081159,
+				0
+			],
+			[
+				174.8670752337128,
+				-36.86402962136679,
+				0
+			],
+			[
+				174.8669673511672,
+				-36.8635852975458,
+				0
+			],
+			[
+				174.8674859757906,
+				-36.86351463459658,
+				0
+			],
+			[
+				174.8675774738167,
+				-36.8634618611108,
+				0
+			],
+			[
+				174.8676801693917,
+				-36.86334930648626,
+				0
+			],
+			[
+				174.8679956721132,
+				-36.86291991902677,
+				0
+			],
+			[
+				174.8684850731606,
+				-36.86300750757891,
+				0
+			],
+			[
+				174.8687057512602,
+				-36.86205671069578,
+				0
+			],
+			[
+				174.8688837768962,
+				-36.86126258464551,
+				0
+			],
+			[
+				174.8679836030663,
+				-36.86110558425673,
+				0
+			],
+			[
+				174.8683416667754,
+				-36.86018303700431,
+				0
+			],
+			[
+				174.8674880467928,
+				-36.85997322896844,
+				0
+			],
+			[
+				174.86689211596,
+				-36.85978541856546,
+				0
+			],
+			[
+				174.8664785559301,
+				-36.85971518675785,
+				0
+			],
+			[
+				174.8661639109101,
+				-36.85970064845166,
+				0
+			],
+			[
+				174.8658328994817,
+				-36.85967874285502,
+				0
+			]
+			]
+		]
+	},
+	};
+
+
+	L.geoJson(glendowiecollege, {
+		color:	'black',
+		fillColor:	'#ff9900',
+		fillOpacity: 0.5
+	}).addTo(map);
+
+
+</script>
+
+
+
+</body>
+</html>
