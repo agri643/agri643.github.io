@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, intial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="../main.css">
-    <title>agri643</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Map_1</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet' />
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-static-top">
@@ -25,6 +28,17 @@
     <p>Alastair Grimson</p>
     <h2 class="text-center">Lab 3</h2>
     <p>this is Lab 3</p>
-  </div>
+      </div>
+    <div id='map_1' style='width: 800px; height: 600px;'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWdyaTY0MyIsImEiOiJjajZwcG44c3cwMWw2MnFxazlzNTF6ajRwIn0.HStrKWWDQZsoKhHo6FuoiQ';
+    var map = new mapboxgl.Map({
+        container: 'map_1',
+        style: 'mapbox://styles/agri643/cj6ppow6k2tv32smiwni4izjt',
+        center:[173.283966,-41.270634],
+        zoom: 4.5
+    });
+    </script>
+
   </body>
 </html>
