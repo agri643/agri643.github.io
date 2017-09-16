@@ -29,16 +29,209 @@
     <h2 class="text-center">Lab 3</h2>
     <p>this is Lab 3</p>
       </div>
-    <div id='map_1' style='width: 100%; height: 600px;'></div>
-    <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYWdyaTY0MyIsImEiOiJjajZwcG44c3cwMWw2MnFxazlzNTF6ajRwIn0.HStrKWWDQZsoKhHo6FuoiQ';
-    var map_1 = new mapboxgl.Map({
-        container: 'map_1',
-        style: 'mapbox://styles/agri643/cj6ppow6k2tv32smiwni4izjt',
-        center:[173.283966,-41.270634],
-        zoom: 4.5
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6" id='map_1'style='width: 50%; height: 700px;'>
+          <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWdyaTY0MyIsImEiOiJjajZwcG44c3cwMWw2MnFxazlzNTF6ajRwIn0.HStrKWWDQZsoKhHo6FuoiQ';
+            var map_1 = new mapboxgl.Map({
+              container: 'map_1',
+              style: 'mapbox://styles/agri643/cj7mhd1zf9cg62rny1ynv1eep',
+              center:[173.283966,-41.270634],
+              zoom: 4.5,
+            });
+            </script>
+          </div>
+        <div class="col-sm-6" id='map_2'style='width: 50%; height: 700px;'>
+          <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoiYWdyaTY0MyIsImEiOiJjajZwcG44c3cwMWw2MnFxazlzNTF6ajRwIn0.HStrKWWDQZsoKhHo6FuoiQ';
+            var map_2 = new mapboxgl.Map({
+                container: 'map_2',
+                style: 'mapbox://styles/agri643/cj6ppow6k2tv32smiwni4izjt',
+                center:[173.283966,-41.270634],
+                zoom: 4.5,
+            });
+            map_2.on('load', function () {
+              map_2.addSource('greatwalks-tracks',{
+                type:'vector',
+                url:'mapbox://agri643.cj6pqc4do01rp32qitaqvojfm-4z4jr'
+                });
+            map_2.addSource("markers",{
+              "type": "geojson",
+              "data": {
+                "type": "FeatureCollection",
+                "features": [
+                {
+                    "type": "Feature",
+                    "properties": {
+                      "marker-symbol": "triangle-stroked",
+                      "Title": "Rakiura Track"
+                    },
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        168.06163787841797,
+                        -46.85443914763506
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "properties": {
+                      "marker-symbol": "triangle-stroked",
+                      "Title": "Kepler Track"
+                    },
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        167.5689697265625,
+                        -45.388806284172254
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "properties": {
+                      "marker-symbol": "triangle-stroked",
+                      "Title": "Milford Track"
+                    },
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        167.7845764160156,
+                        -44.78963254761407
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "properties": {
+                      "marker-symbol": "triangle-stroked",
+                      "Title": "Routeburn Track"
+                    },
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        168.17047119140625,
+                        -44.754535484160066
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "properties": {
+                      "marker-symbol": "triangle-stroked",
+                      "Title": "Heaphy Track"
+                    },
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        172.27386474609375,
+                        -40.86783384138491
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "properties": {
+                      "marker-symbol": "triangle-stroked",
+                      "Title": "Abel Tasman Coast Track"
+                    },
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        173.045654296875,
+                        -40.8719877566974
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "properties": {
+                      "marker-symbol": "triangle-stroked",
+                      "Title": "Tongariro Northern Circuit"
+                    },
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        175.63053131103516,
+                        -39.14577141363701
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Feature",
+                    "properties": {
+                      "marker-symbol": "triangle-stroked",
+                      "Title": "Lake Waikaremoana Track"
+                    },
+                    "geometry": {
+                      "type": "Point",
+                      "coordinates": [
+                        177.00279235839844,
+                        -38.77389304718155
+                      ]
+                    }
+                  }
+                ],
+              }
+            });
+    map_2.addLayer({
+        "id": "tracks",
+        "type": "line",
+        "source": "greatwalks-tracks",
+        "source-layer": "greatwalksplan",
+        "layout": {
+            "visibility": "visible",
+            "line-join": "round",
+            "line-cap": "round"
+        },
+        "paint": {
+            "line-color": "#ff69b4",
+            "line-width": 1
+        }
     });
-    </script>
+    map_2.addLayer({
+      "id":"markers",
+      "type":"symbol",
+      "source":"markers",
+      "layout":{
+        "icon-image":"{marker-symbol}-15",
+        "text-field": "{Title}",
+        "text-font":["Open Sans Semibold","Arial Unicode MS Bold"],
+        "text-offset":[0,0.6],
+        "text-size":10,
+        "text-anchor":"top",
+        "text-allow-overlap": true
+
+
+      },
+      "paint": {
+        "text-color":"#00ff87",
+        "text-halo-color":"rgba(0,0,0,1)",
+        "text-halo-width": 1.5,
+        "text-halo-blur": 1
+      }
+    });
+    map_2.setLayerZoomRange('tracks',6,0);
+    map_2.setLayerZoomRange('markers', 0, 22);
+
+});
+map_2.on('mousemove',function(e){
+  var features = map_2.queryRenderedFeatures(e.point, {layers:['markers']});
+  map_2.getCanvas().style.cursor = features.length ? 'pointer': '';
+});
+map_2.on('click',function(e){
+  var features = map_2.queryRenderedFeatures(e.point, {layers: ['markers']});
+  if (features.length){
+    map_2.flyTo({center:features[0].geometry.coordinates,zoom:10});
+  }
+});
+            </script>
+      </div>
+          <div class="w-100"></div>
+    </div>
+  </div>
 
   </body>
 </html>
