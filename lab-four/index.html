@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, intial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="../main.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
@@ -41,7 +41,7 @@
   	maxZoom: 19
   }).addTo(map);
 
-    function getColor(d) {
+    function getColor(d) { //need another class of >100
       return d > 64  ? '#b10026' :
              d > 32  ? '#e31a1c' :
              d > 16  ? '#fc4e2a' :
@@ -78,6 +78,7 @@ function highlightFeature(e) {
 }
 function resetHighlight(e) {
     geojson.resetStyle(e.target);
+    info.update();
 }
 function onEachFeature(feature, layer) {
     layer.on({
@@ -91,7 +92,22 @@ geojson = L.geoJson(hexfire, {
     onEachFeature: onEachFeature
 }).addTo(map);
 
-L.geoJson(hexfire, {style: style}).addTo(map);
+var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+};
+
+info.update = function (props) {
+    this._div.innerHTML = '<h4>Number of Structural Fires Reported</h4>' +  (props ?
+        '<b>' + props.hexfire + '</b><br />' + props.NUMPOINTS + ' fires'
+        : 'Hover over a bin');
+};
+
+info.addTo(map);
+
 		</script>
 	</div>
   </body>
