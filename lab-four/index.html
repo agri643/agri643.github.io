@@ -142,18 +142,15 @@ legend.onAdd = function(map){
   key_labels = ["0","1-4","5-8","9-16","17-32","32-64",">64"],
   labels = ["Structural Fires 2013-2016"],
   from, to;
-
-        for (var i = 0; i < grades.length; i++) {
-          from = grades[i];
-          to = grades[i + 1];
-
-          labels.push(
-            '<i style="background:' + getColor(from + 1) + '"></i> ' +
-             key_labels[i]);
-        }
-
-        div.innerHTML = labels.join('<br>');
-        return div;
+  for (var i = 0; i < grades.length; i++) {
+    from = grades[i];
+    to = grades[i + 1];
+    labels.push(
+    '<i style="background:' + getColor(from + 1) + '"></i> ' +
+       key_labels[i]);
+    }
+      div.innerHTML = labels.join('<br>');
+      return div;
       };
 
       legend.addTo(map);
