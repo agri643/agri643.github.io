@@ -69,14 +69,14 @@
   }).addTo(map);
 
     function getColor(d) { 
-      return d > 100  ? '#99000d' :
-             d > 60  ? '#cb181d' :
-             d > 30  ? '#ef3b2c' :
-             d > 20   ? '#fb6a4a' :
-             d > 10   ? '#fc9272' :
-             d > 5   ? '#fcbba1' :
-             d > 0   ? '#fee0d2' :
-                        '#fff5f0';
+      return d > 100  ? '#67000d' :
+             d > 60  ? '#a50f15' :
+             d > 30  ? '#cb181d' :
+             d > 20   ? '#ef3b2c' :
+             d > 10   ? '#fb6a4a' :
+             d > 5   ? '#fc9272' :
+             d > 0   ? '#fcbba1' :
+                        '#fee0d2';
   }
   function style(feature) {
     return {
@@ -139,7 +139,7 @@ info.addTo(map);
 var legend=L.control({position:'bottomright'});
 legend.onAdd = function(map){
   var div = L.DomUtil.create('div','info legend'),
-  grades = [0,5,10,20,30,60,100,120],
+  grades = [0,1,6,11,21,31,61,101],
   key_labels = ["0","1-5","6-10","11-20","21-30","31-60","61-100",">100"],
   labels = ["Structural Fires 2013-2016"],
   from, to;
