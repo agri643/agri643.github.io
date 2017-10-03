@@ -75,8 +75,8 @@
              d > 20   ? '#fb6a4a' :
              d > 10   ? '#fc9272' :
              d > 5   ? '#fcbba1' :
-             d > 0   ? '#fee5d9' :
-                        '#ffffb2';
+             d > 0   ? '#fee0d2' :
+                        '#fff5f0';
   }
   function style(feature) {
     return {
@@ -139,7 +139,7 @@ info.addTo(map);
 var legend=L.control({position:'bottomright'});
 legend.onAdd = function(map){
   var div = L.DomUtil.create('div','info legend'),
-  grades = [0,4,8,16,32,64],
+  grades = [0,5,10,20,30,60,100,120],
   key_labels = ["0","1-5","6-10","11-20","21-30","31-60","61-100",">100"],
   labels = ["Structural Fires 2013-2016"],
   from, to;
