@@ -139,15 +139,15 @@ info.addTo(map);
 var legend=L.control({position:'bottomright'});
 legend.onAdd = function(map){
   var div = L.DomUtil.create('div','info legend'),
-  grades = [1,6,11,21,31,61,101],
-  key_labels = ["1-5","6-10","11-20","21-30","31-60","61-100",">100"],
+  grades = [0,1,6,11,21,31,61,101],
+  key_labels = ["0","1-5","6-10","11-20","21-30","31-60","61-100",">100"],
   labels = ["Structural Fires 2013-2016"],
   from, to;
   for (var i = 0; i < grades.length; i++) {
     from = grades[i];
     to = grades[i + 1];
     labels.push(
-    '<i style="background:' + getColor(from + 1) + '"></i> ' +
+    '<i style="background:' + getColor(from) + '"></i> ' +
        key_labels[i]);
     }
       div.innerHTML = labels.join('<br>');
