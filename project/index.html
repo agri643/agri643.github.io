@@ -37,7 +37,7 @@ var x = d3.scaleLinear()
 	.domain([1,100])
 	.rangeRound([600,860]);
 
-var color = d3.scale.threshold()
+var color = d3.scaleThreshold()
 	.domain([0.1, 0.2, 0.3, 0.4, 0.5])
 	.range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
 	
