@@ -1,69 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>USA Votes</title>
-  <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></scipt>
-  <script src="http://d3js.org/topojson.v1.min.js"></script>
-  <script src="https://d3js.org/d3-queue.v2.min.js"></script>
-  <style>
-  .states {
-    fill: none;
-    stroke: #fff;
-    stroke-linejoin:round;
-  }
-  </style>
-</head>
-<body>
-  <!-- Page elements and content will go here. -->
-  <script>
-  //map width and heights
-  var width = 700;
-  var height = 580;
+<style>
 
-  var color = d3.scaleThreshold()
-      .domain([0.02, 0.04, 0.06, 0.08, 0.10])
-      .range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"])
-  //define the projection
-  //Using albers projection of the USA
-  var projection = d3.geoAlbers()
-      .scale(1000)
-      .translate([width / 2,height / 2]);
-  //Create GeoPath function that uses built-in D3 functionality to turn
-  //lat/lon coords into screen coords
-  var path = d3.geoPath() //create path generator function
-      .projection(projection); //add our define projection
-  //Create svg
-  var svg = d3.select( "body" ).append( "svg" )
-      .attr( "width", width )
-      .attr( "height", height );
+.states {
+	fill: #e3e3e3;
+	stroke: #333
+	stroke-width: 0.5;
+}
+.states	:hover {
+	fill: red;
+}
+.state-borders {
+  fill: none;
+  stroke: #333;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
 
-  //Queue up datasets using d3 queue
-  d3.queue()
-    .defer(d3.json, "states.json") //Load US states
-    .defer(d3.csv, "Book1.csv")
-    .await(ready); //Run 'ready' when JSONs are loaded
-function ready(error, us, Trump){
+</style>
+<svg width="960" height="600"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script>
+
+var svg = d3.select("svg"),
+	width = +svg.attr("width"),
+	height = +svg.attr("height");
+	
+var democrat = d3.map();
+
+var path = d3.geoPath();
+
+var x = d3.scaleLinear()
+	.domain([1,10])
+	.rangeRound([600,860]);
+
+var color = d3.scaleThreshold()
+	.domain(d3.range(2,10))
+	.range(d3.schemeBlues[9]);
+	
+var g = svg.append("g")
+	.attr("class", "key")
+	.attr("transform", "translate(0,40)");
+	
+g.selectAll("rect")
+	.data(color.range().map(function(d) {
+		d = color.invertExtent(d);
+		if (d[0] == null) d[0] = x.domain()[0];
+		if (d[1] == null) d[1] = x.domain()[1];
+		return d;
+	}))
+	.enter().append("rect")
+		.attr("height", 8)
+		.attr("x", function(d) { return x(d[0]); })
+		.attr("width", function(d) { return x(d[1]) - x(d[0]); })
+		.attr("fill", function(d) { return color(d[0]); });
+		
+g.append("text")
+    .attr("class", "caption")
+    .attr("x", x.range()[0])
+    .attr("y", -6)
+    .attr("fill", "#000")
+    .attr("text-anchor", "start")
+    .attr("font-weight", "bold")
+    .text("Percentage Votes");
+	
+g.call(d3.axisBottom(x)
+    .tickSize(13)
+    .tickFormat(function(x, i) { return i ? x : x + "%"; })
+    .tickValues(color.domain()))
+  .select(".domain")
+    .remove();
+	
+d3.queue()
+	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
+	.defer(d3.csv, "Book1.csv", function(d) { democrat.set(d.id, +d.clinton);})
+	.await(ready);
+
+function ready(error, us) {
   if (error) throw error;
 
-  var rateById = {};
-    trump.forEach(function(d) {rateById[d.id] = +d.rate;});
   svg.append("g")
       .attr("class", "states")
-      .selectAll("path")
-      .data(topojson.feature(us, us.objects.counties).features)
-      .enter().append("path")
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
+	  .attr("fill", function(d) { return color(d.clinton = democrat.get(d.id)); })
       .attr("d", path)
-      .style("fill", function(d) {return color(rateById[d.id]);});
+	.append("title")
+	  .text(function(d) { return d.clinton + "%"; });
+
   svg.append("path")
-      .datum(topojson.mesh(us, us.objects.states, function(a,b) { return a.id !== b.id}))
       .attr("class", "states")
-      .attr("d", path);
+      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+	  .attr("d", path);
 }
-  </script>
-</body>
-</html>
-<!-- https://stackoverflow.com/questions/21381097/d3-is-not-defined-referenceerror
-http://duspviz.mit.edu/d3-workshop/mapping-data-with-d3/
-https://github.com/mjfoster83/d3-workshop/tree/master/d3_part4_mappingData
+
+</script>
