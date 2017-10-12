@@ -78,8 +78,7 @@ g.call(d3.axisBottom(x)
 	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { democrat.set(d.id, +d.clinton);})
-	.defer(d3.csv, "Book2.csv", function(d) { republican.set(d.id, +d.trump);})
+	.defer(d3.csv, "Book1.csv", function(d) { democrat.set(d.id, +d.clinton, +d.trump);})
 	.await(ready);
 
 d3.select("#changeclinton").on("click", function ready(error, us) {
@@ -109,7 +108,7 @@ d3.select("#changetrump").on("click", function ready(error, us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-	  .attr("fill", function(d) { return color(d.trump = republican.get(d.id)); })
+	  .attr("fill", function(d) { return color(d.trump = democrat.get(d.id)); })
       .attr("d", path)
 	.append("title")
 	  .text(function(d) { return d.trump + "%"; });
