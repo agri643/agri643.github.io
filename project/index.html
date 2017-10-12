@@ -34,12 +34,12 @@ var democrat = d3.map();
 var path = d3.geoPath();
 
 var x = d3.scaleLinear()
-	.domain([1,10])
+	.domain([1,100])
 	.rangeRound([600,860]);
 
-var color = d3.scaleThreshold()
-	.domain(d3.range(2,10))
-	.range(d3.schemeBlues[9]);
+var color = d3.scale.threshold()
+	.domain([0.1, 0.2, 0.3, 0.4, 0.5])
+	.range(["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]);
 	
 var g = svg.append("g")
 	.attr("class", "key")
