@@ -109,7 +109,7 @@ g.call(d3.axisBottom(x)
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { democrat.set(d.id, +d.Clinton);})
-	.defer(d3.csv, "Book2.csv", function(j) { republican.set(j.id, +j.Trump);})
+	.defer(d3.csv, "Book2.csv", function(d) { republican.set(d.id, +d.Trump);})
 	.await(ready);
 
 function ready(error, us) {
@@ -139,15 +139,15 @@ function ready(error, us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-	  .attr("fill", function(j) { return color(j.Trump = republican.get(j.id)); })
+	  .attr("fill", function(d) { return color(d.Trump = republican.get(d.id)); })
       .attr("j", path)
 	.append("title")
-	  .text(function(j) { return j.Trump + "%"; });
+	  .text(function(d) { return d.Trump + "%"; });
 
   svg.append("path")
       .attr("class", "states")
-      .attr("j", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
-	  .attr("j", path);
+      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+	  .attr("d", path);
 };	
 	
 </script>
