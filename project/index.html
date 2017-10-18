@@ -61,7 +61,7 @@
 <div id="option">
 	<input name="updateButton"
 	       type="button"
-	       value="Percentage of trump Voters"
+	       value="Percentage of Trump Voters"
 	       onclick="updatetrump()" />
 <script>
 
@@ -118,8 +118,9 @@ g.call(d3.axisBottom(x)
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { democrat.set(d.id, +d.Clinton);})
+	.await(updateclinton);
 	.defer(d3.csv, "Book2.csv", function(d) { republican.set(d.id, +d.Trump);})
-	.await(ready);
+	.await(updatetrump);
 
 function updateclinton(us) {
 
