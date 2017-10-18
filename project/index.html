@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">Project</h2>
+    <h2 class="text-center">Project1</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -118,7 +118,7 @@ g.call(d3.axisBottom(x)
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { democrat.set(d.id, +d.Clinton);})
-	.await(updateclinton);
+	.await(updateclinton)
 	.defer(d3.csv, "Book2.csv", function(d) { republican.set(d.id, +d.Trump);})
 	.await(updatetrump);
 
