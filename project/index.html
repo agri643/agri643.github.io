@@ -49,8 +49,8 @@
     <h2 class="text-center">Project</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
-<button type="button" id="changeclinton">Percentage of Clinton Voters</button>
-<button type="button" id="changetrump">Percentage of Trump Voters</button>
+<button type="button" id="democrat">Percentage of Clinton Voters</button>
+<button type="button" id="republican">Percentage of Trump Voters</button>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
@@ -107,7 +107,8 @@ g.call(d3.axisBottom(x)
 	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { democrat.set(d.id, +d.clinton);})
+	.defer(d3.csv, "Book1.csv", function(d) { democrat.set(d.id, +d.Clinton);})
+	.defer(d3.csv, "Book2.csv", function(j) { republican.set(j.id, +j.Trump);})
 	.await(ready);
 
 function ready(error, us) {
@@ -118,10 +119,10 @@ function ready(error, us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-	  .attr("fill", function(d) { return color(d.clinton = democrat.get(d.id)); })
+	  .attr("fill", function(d) { return color(d.Clinton = democrat.get(d.id)); })
       .attr("d", path)
 	.append("title")
-	  .text(function(d) { return d.clinton + "%"; });
+	  .text(function(d) { return d.Clinton + "%"; });
 
   svg.append("path")
       .attr("class", "states")
@@ -129,6 +130,25 @@ function ready(error, us) {
 	  .attr("d", path);
 };
 
+function ready(error, us) {
+  if (error) throw error;
+
+  svg.append("g")
+      .attr("class", "states")
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
+	  .attr("fill", function(j) { return color(j.Trump = republican.get(j.id)); })
+      .attr("j", path)
+	.append("title")
+	  .text(function(j) { return j.Trump + "%"; });
+
+  svg.append("path")
+      .attr("class", "states")
+      .attr("j", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+	  .attr("j", path);
+};	
+	
 </script>
     <p>Source: New Zealand Transport Agency (NZTA) Crash Analysis System</p>
   </div>
