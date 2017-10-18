@@ -46,23 +46,12 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">Project</h2>
+    <h2 class="text-center">Project2</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
-<div id="option">
-	<input name="updateButton"
-	       type="button"
-	       value="Percentage of Clinton Voters"
-	       onclick="updateclinton()" />
-	
-<div id="option">
-	<input name="updateButton"
-	       type="button"
-	       value="Percentage of Trump Voters"
-	       onclick="updatetrump()" />
 <script>
 
 var svg = d3.select("svg"),
@@ -123,7 +112,7 @@ d3.queue()
 	.await(ready);
 
 function ready(error,us) {
-	if (error) thro error;
+	if (error) throw error;
 
   svg.append("g")
       .attr("class", "states")
@@ -178,6 +167,17 @@ function updatetrump(us) {
 };	
 	
 </script>
+	  <div id="option">
+	<input name="updateButton"
+	       type="button"
+	       value="Percentage of Clinton Voters"
+	       onclick="updateclinton()" />
+	
+<div id="option">
+	<input name="updateButton"
+	       type="button"
+	       value="Percentage of Trump Voters"
+	       onclick="updatetrump()" />
     <p>Source: New Zealand Transport Agency (NZTA) Crash Analysis System</p>
   </div>
   </body>
