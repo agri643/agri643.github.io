@@ -49,11 +49,14 @@
     <h2 class="text-center">Project</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
-<button type="button" id="democrat">Percentage of Clinton Voters</button>
-<button type="button" id="republican">Percentage of Trump Voters</button>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
+<div id="option">
+	<input name="Percentage of Clinton Voters"
+	       type="button"
+	       value="Update"
+	       onclick="updateclinton()" />
 <script>
 
 var svg = d3.select("svg"),
@@ -112,8 +115,7 @@ d3.queue()
 	.defer(d3.csv, "Book2.csv", function(d) { republican.set(d.id, +d.Trump);})
 	.await(ready);
 
-function ready(error, us) {
-  if (error) throw error;
+function clinton(us) {
 
   svg.append("g")
       .attr("class", "states")
@@ -131,8 +133,7 @@ function ready(error, us) {
 	  .attr("d", path);
 };
 
-function ready(error, us) {
-  if (error) throw error;
+function trump(us) {
 
   svg.append("g")
       .attr("class", "states")
