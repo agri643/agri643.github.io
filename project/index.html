@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">Project</h2>
+    <h2 class="text-center">Project1</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -60,7 +60,7 @@ var svg = d3.select("svg"),
 	width = +svg.attr("width"),
 	height = +svg.attr("height");
 	
-var USA = d3.map();
+var vote = d3.map();
 
 var path = d3.geoPath();
 
@@ -107,8 +107,8 @@ g.call(d3.axisBottom(x)
 	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(f) { USA.set(f.id, +f.clinton);})
-	.defer(d3.csv, "Book2.csv", function(d) { USA.set(d.id, +d.trump);})
+	.defer(d3.csv, "Book1.csv", function(f) { vote.set(f.id, +f.clinton);})
+	.defer(d3.csv, "Book2.csv", function(d) { vote.set(d.id, +d.trump);})
 	.await(ready);
 
 function ready(error,us) {
@@ -119,15 +119,15 @@ function ready(error,us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-	  .attr("fill", function(f) { return color(f.clinton = democrat.get(f.id)); })
+	  .attr("fill", function(f) { return color(f.clinton = USA.get(f.id)); })
       .attr("f", path)
 	.append("title")
 	  .text(function(f) { return f.clinton + "%"; });
 
   svg.append("path")
       .attr("class", "states")
-      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
-	  .attr("d", path);
+      .attr("f", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+	  .attr("f", path);
 	
 };
 
