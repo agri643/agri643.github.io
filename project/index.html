@@ -11,7 +11,7 @@
 
 .states {
 	fill: #e3e3e3;
-	stroke: #333;
+
 }
 .states	:hover {
 	stroke: white;
@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">Project</h2>
+    <h2 class="text-center">Project1</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -87,7 +87,16 @@ g.selectAll("rect")
 		.attr("height", 8)
 		.attr("x", function(d) { return x(d[0]); })
 		.attr("width", function(d) { return x(d[1]) - x(d[0]); })
-		.attr("fill", function(d) { return color(d[0]); });
+		.attr("fill", function(d) { return color(d[0]); })
+		.attr("class","states")
+		.on("mouseover", function(d){
+			d3.select("h22").text(d.properties.name);
+			d3.select(this).attr("class","states hover");
+})
+	.on("mouseout", function(d){
+	d3.select("h22").text("");
+	d3.select(this).attr("class","states"):
+});
 		
 g.append("text")
     .attr("class", "caption")
@@ -109,6 +118,8 @@ d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
 	.await(ready);
+
+	
 
 function ready(error,us) {
 	if (error) throw error;
