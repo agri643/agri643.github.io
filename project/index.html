@@ -45,7 +45,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">Project</h2>
+    <h2 class="text-center">Project1</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -122,6 +122,10 @@ function ready(error,us) {
       .attr("d", path)
 	.append("title")
 	  .text(function(d) { return d.clinton + "%"; });
+	  svg.append("path")
+      .attr("class", "states")
+      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+      .attr("d", path);
 }
 d3.select("#changetrump").on("click", function() {
 	  svg.append("g")
@@ -133,6 +137,10 @@ d3.select("#changetrump").on("click", function() {
       .attr("f", path)
 	.append("title")
 	  .text(function(f) { return f.trump + "%"; });
+	  svg.append("path")
+      .attr("class", "states")
+      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+      .attr("d", path);
 
 	
 });
@@ -146,6 +154,10 @@ d3.select("#changetrump").on("click", function() {
       .attr("d", path)
 	.append("title")
 	  .text(function(d) { return d.trump + "%"; });
+		  svg.append("path")
+      .attr("class", "states")
+      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+      .attr("d", path);
 });
 
 </script>
