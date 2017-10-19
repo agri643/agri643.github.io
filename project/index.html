@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">Project</h2>
+    <h2 class="text-center">Project1</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -107,7 +107,7 @@ g.call(d3.axisBottom(x)
 	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton, +d.trump);})
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
 	.await(ready);
 
 function ready(error,us) {
@@ -123,12 +123,12 @@ function ready(error,us) {
 	.append("title")
 	  .text(function(d) { return d.clinton + "%"; });
 
-  svg.append("path")
+ # svg.append("path")
       .attr("class", "states")
-      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
-	  .attr("d", path);
+      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("d", path);
 	
-};
+}
 
 
 
