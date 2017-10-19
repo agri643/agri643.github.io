@@ -10,7 +10,7 @@
 
 .states {
 	fill: #e3e3e3;
-	stroke: #333;
+
 }
 .states	:hover {
 	stroke: white;
@@ -107,6 +107,7 @@ g.call(d3.axisBottom(x)
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
+	.defer(d3.csv, "Book2.csv", function(f) { vote.set(f.id, +f.clinton); })
 	.await(ready);
 
 function ready(error,us) {
@@ -121,11 +122,18 @@ function ready(error,us) {
       .attr("d", path)
 	.append("title")
 	  .text(function(d) { return d.clinton + "%"; });
-
-  svg.append("path")
+}
+d3.selet("#changetrump").on("click", function() {
+	  svg.append("g")
       .attr("class", "states")
-      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
-      .attr("d", path);
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
+	  .attr("fill", function(f) { return color(f.trump = vote.get(f.id)); })
+      .attr("f", path)
+	.append("title")
+	  .text(function(f) { return f.trump + "%"; });
+
 	
 }
 
