@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">Project</h2>
+    <h2 class="text-center">11Project</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -60,7 +60,7 @@ var svg = d3.select("svg"),
 	width = +svg.attr("width"),
 	height = +svg.attr("height");
 	
-var democrat = d3.map();
+var USA = d3.map();
 
 var path = d3.geoPath();
 
@@ -77,17 +77,17 @@ var g = svg.append("g")
 	.attr("transform", "translate(0,40)");
 	
 g.selectAll("rect")
-	.data(color.range().map(function(b) {
-		b = color.invertExtent(b);
-		if (b[0] == null) b[0] = x.domain()[0];
-		if (b[1] == null) b[1] = x.domain()[1];
-		return b;
+	.data(color.range().map(function(f) {
+		f = color.invertExtent(f);
+		if (f[0] == null) f[0] = x.domain()[0];
+		if (f[1] == null) f[1] = x.domain()[1];
+		return f;
 	}))
 	.enter().append("rect")
 		.attr("height", 8)
-		.attr("x", function(b) { return x(b[0]); })
-		.attr("width", function(b) { return x(b[1]) - x(b[0]); })
-		.attr("fill", function(b) { return color(b[0]); });
+		.attr("x", function(f) { return x(f[0]); })
+		.attr("width", function(f) { return x(f[1]) - x(f[0]); })
+		.attr("fill", function(f) { return color(f[0]); });
 		
 g.append("text")
     .attr("class", "caption")
@@ -107,8 +107,8 @@ g.call(d3.axisBottom(x)
 	
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(b) { democrat.set(b.id, +b.clinton);})
-	.defer(d3.csv, "Book2.csv", function(d) { republican.set(d.id, +d.trump);})
+	.defer(d3.csv, "Book1.csv", function(f) { USA.set(f.id, +f.clinton);})
+	.defer(d3.csv, "Book2.csv", function(d) { USA.set(d.id, +d.trump);})
 	.await(ready);
 
 function ready(error,us) {
@@ -119,10 +119,10 @@ function ready(error,us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-	  .attr("fill", function(b) { return color(b.clinton = democrat.get(b.id)); })
-      .attr("b", path)
+	  .attr("fill", function(f) { return color(f.clinton = democrat.get(f.id)); })
+      .attr("f", path)
 	.append("title")
-	  .text(function(b) { return b.clinton + "%"; });
+	  .text(function(f) { return f.clinton + "%"; });
 
   svg.append("path")
       .attr("class", "states")
