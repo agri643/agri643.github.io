@@ -50,7 +50,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">Project1</h2>
+    <h2 class="text-center">Harry</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -159,7 +159,7 @@ function readyTrump(error,us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-	  .attr("fill", function(d) { return color(d.trump = vote.get(d.id)); })
+	  .attr("fill", function(d) { return colorTrump(d.trump = vote.get(d.id)); })
       .attr("d", path)
 	.append("title")
 	  .text(function(d) { return d.trump + "%"; });
@@ -174,7 +174,6 @@ function readyTrump(error,us) {
 
 
 function changeClinton() {
-	console.log("clinton");
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
@@ -182,7 +181,6 @@ function changeClinton() {
 }
 
 function changeTrump() {
-	console.log("trump");
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
