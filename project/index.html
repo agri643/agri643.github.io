@@ -56,9 +56,11 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
-<button type="button" id="changeclinton">Percentage of Clinton Voters</button>
-<button type="button" id="changetrump">Percentage of Trump Voters</button>
+<button type="button" id="changeclinton" onclick="changeClinton()">Percentage of Clinton Voters</button>
+<button type="button" id="changetrump" onclick="changeTrump()">Percentage of Trump Voters</button>
 <script>
+
+
 
 var svg = d3.select("svg"),
 	width = +svg.attr("width"),
@@ -121,6 +123,7 @@ g.call(d3.axisBottom(x)
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
 	.await(ready);
 
 	
@@ -143,6 +146,14 @@ function ready(error,us) {
       .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
       .attr("d", path);
 	
+}
+
+function changeClinton() {
+	console.log("clinton");
+}
+
+function changeTrump() {
+	console.log("trump");
 }
 
 </script>
