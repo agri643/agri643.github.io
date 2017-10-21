@@ -78,6 +78,10 @@ var color = d3.scaleThreshold()
 	.domain([10, 20, 30, 40, 50, 60])
 	.range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#3182bd", "#08519c"]);
 	
+var colorTrump = d3.scaleThreshold()
+	.domain([10, 20, 30, 40, 50, 60])
+	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"]);
+	
 var g = svg.append("g")
 	.attr("class", "key")
 	.attr("transform", "translate(0,40)");
@@ -147,6 +151,28 @@ function ready(error,us) {
 	
 }
 
+function readyTrump(error,us) {
+	if (error) throw error;
+
+  svg.append("g")
+      .attr("class", "states")
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
+	  .attr("fill", function(d) { return color(d.trump = vote.get(d.id)); })
+      .attr("d", path)
+	.append("title")
+	  .text(function(d) { return d.trump + "%"; });
+
+  svg.append("path")
+      .attr("class", "states")
+      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+      .attr("d", path);
+	
+}
+
+
+
 function changeClinton() {
 	console.log("clinton");
 	d3.queue()
@@ -160,7 +186,7 @@ function changeTrump() {
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
-	.await(ready);
+	.await(readyTrump);
 }
 
 </script>
