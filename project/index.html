@@ -50,7 +50,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">WOW2</h2>
+    <h2 class="text-center">WOW</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -171,6 +171,18 @@ function changeClinton() {
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
 	.await(ready);
 	
+	var x = d3.scaleLinear()
+	.domain([0,60])
+	.range([600,860]);
+
+var color = d3.scaleThreshold()
+	.domain([10, 20, 30, 40, 50, 60])
+	.range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#3182bd", "#08519c"]);
+		
+	var g = svg.append("g")
+	.attr("class", "key")
+	.attr("transform", "translate(0,40)");
+		
 	g.selectAll("rect")
 	.data(color.range().map(function(d) {
 		d = color.invertExtent(d);
@@ -206,6 +218,19 @@ function changeTrump() {
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
 	.await(readyTrump);
+	
+	var x = d3.scaleLinear()
+	.domain([0,60])
+	.range([600,860]);
+		
+var colorTrump = d3.scaleThreshold()
+	.domain([10, 20, 30, 40, 50, 60])
+	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"]);
+	
+var g = svg.append("g")
+	.attr("class", "key")
+	.attr("transform", "translate(0,40)");
+	
 	
 	g.selectAll("rect")
 	.data(colorTrump.range().map(function(d) {
