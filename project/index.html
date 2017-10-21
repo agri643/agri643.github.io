@@ -170,6 +170,19 @@ function changeClinton() {
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
 	.await(ready);
+	
+	g.selectAll("rect")
+	.data(color.range().map(function(d) {
+		d = color.invertExtent(d);
+		if (d[0] == null) d[0] = x.domain()[0];
+		if (d[1] == null) d[1] = x.domain()[1];
+		return d;
+	}))
+	.enter().append("rect")
+		.attr("height", 8)
+		.attr("x", function(d) { return x(d[0]); })
+		.attr("width", function(d) { return x(d[1]) - x(d[0]); })
+		.attr("fill", function(d) { return color(d[0]); });
 }
 
 function changeTrump() {
@@ -177,6 +190,19 @@ function changeTrump() {
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
 	.await(readyTrump);
+	
+	g.selectAll("rect")
+	.data(colorTrump.range().map(function(d) {
+		d = colorTrump.invertExtent(d);
+		if (d[0] == null) d[0] = x.domain()[0];
+		if (d[1] == null) d[1] = x.domain()[1];
+		return d;
+	}))
+	.enter().append("rect")
+		.attr("height", 8)
+		.attr("x", function(d) { return x(d[0]); })
+		.attr("width", function(d) { return x(d[1]) - x(d[0]); })
+		.attr("fill", function(d) { return colorTrump(d[0]); });
 }
 
 </script>
