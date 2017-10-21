@@ -123,7 +123,6 @@ g.call(d3.axisBottom(x)
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
 	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
-	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
 	.await(ready);
 
 	
@@ -150,10 +149,18 @@ function ready(error,us) {
 
 function changeClinton() {
 	console.log("clinton");
+	d3.queue()
+	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
+	.await(ready);
 }
 
 function changeTrump() {
 	console.log("trump");
+	d3.queue()
+	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
+	.await(ready);
 }
 
 </script>
