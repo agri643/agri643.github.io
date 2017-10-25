@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">lol2016 Election Results per State</h2>
+    <h2 class="text-center">2016 Election Results per State</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -82,6 +82,10 @@ var color = d3.scaleThreshold()
 var colorTrump = d3.scaleThreshold()
 	.domain([10, 20, 30, 40, 50, 60, 70])
 	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"]);
+	
+var colorHome = d3.scaleThreshold()
+	.domain([1,2])
+	.range(["#084594","#99000d"]);
 	
 var g = svg.append("g")
 	.attr("class", "key")
@@ -157,7 +161,7 @@ function readyHome(error,us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-	  .attr("fill", function(d) { return color(d.other= vote.get(d.id)); })
+	  .attr("fill", function(d) { return colorHome(d.other= vote.get(d.id)); })
       .attr("d", path);
 	
   svg.append("path")
