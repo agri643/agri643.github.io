@@ -52,6 +52,7 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
+<button type="button" id="changehome" onclick="changeHome()">Overview</button>
 <button type="button" id="changeclinton" onclick="changeClinton()">Percentage of Clinton Voters</button>
 <button type="button" id="changetrump" onclick="changeTrump()">Percentage of Trump Voters</button>
 <script>
@@ -141,6 +142,24 @@ function ready(error,us) {
 <!-- on hover of a state it will say the percentage that voted clinton -->
 	  .text(function(d) { return d.clinton + "%"; });
 
+  svg.append("path")
+      .attr("class", "states")
+      .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
+      .attr("d", path);
+	
+}
+	
+function readyHome(error,us) {
+	if (error) throw error;
+<!-- add the states and state id from the .json onto the svg-->
+  svg.append("g")
+      .attr("class", "states")
+    .selectAll("path")
+    .data(topojson.feature(us, us.objects.states).features)
+    .enter().append("path")
+	  .attr("fill", function(d) { return color(d.home= vote.get(d.other)); })
+      .attr("d", path);
+	
   svg.append("path")
       .attr("class", "states")
       .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })))
@@ -268,6 +287,13 @@ var g = svg.append("g")
   .select(".domain")
     .remove();
 }
+<!-- onclick of the home button it will execute the home function -->
+function changeHome() {
+	d3.queue()
+	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.other); })
+	.await(readyHome);
+
 
 </script>
 
