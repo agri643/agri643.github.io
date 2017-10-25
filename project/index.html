@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">WOW</h2>
+    <h2 class="text-center">WOW2</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -159,8 +159,7 @@ function readyTrump(error,us) {
 	  .attr("fill", function(d) { return colorTrump(d.trump = vote.get(d.id)); })
       .attr("d", path)
 	.append("title")
-	  .text(function(d) { return d.trump + "%"; })
-	  .text(function(d) { return d.name; });
+	  .text(function(d) { return d.name + d.trump + "%"; });
 
   svg.append("path")
       .attr("class", "states")
