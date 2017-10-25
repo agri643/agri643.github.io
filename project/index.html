@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">WOW</h2>
+    <h2 class="text-center">WOW2</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -139,7 +139,7 @@ function ready(error,us) {
       .attr("d", path)
 	.append("title")
 <!-- on hover of a state it will say the percentage that voted clinton -->
-	  .text(function(d) { return d.clinton + "%"; });
+	  .text(function(d) { return d.name + "%"; });
 
   svg.append("path")
       .attr("class", "states")
