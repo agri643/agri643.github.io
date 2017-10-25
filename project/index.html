@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">WOW</h2>
+    <h2 class="text-center">2016 Election Results per State</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -69,18 +69,18 @@ var path = d3.geoPath();
 <!-- create the legend bar -->
 <!-- the value range, followed by the position on the svg -->
 var x = d3.scaleLinear()
-	.domain([0,60])
+	.domain([0,70])
 	.range([600,860]);
 	
 <!-- assign the colours to the legend -->
 var color = d3.scaleThreshold()
-	.domain([10, 20, 30, 40, 50, 60])
-	.range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#3182bd", "#08519c"]);
+	.domain([10, 20, 30, 40, 50, 60, 70])
+	.range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
 	
 <!-- because trump needs his own colour, need new bar for trump -->
 var colorTrump = d3.scaleThreshold()
 	.domain([10, 20, 30, 40, 50, 60])
-	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"]);
+	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"]);
 	
 var g = svg.append("g")
 	.attr("class", "key")
@@ -121,7 +121,7 @@ g.call(d3.axisBottom(x)
 <!-- after .json and .csv have been retrieved it waits for the ready function -->
 d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton, +d.name); })
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
 	.await(ready);
 
 	
@@ -139,7 +139,7 @@ function ready(error,us) {
       .attr("d", path)
 	.append("title")
 <!-- on hover of a state it will say the percentage that voted clinton -->
-	  .text(function(d) { return d.name + "%"; });
+	  .text(function(d) { return d.clinton + "%"; });
 
   svg.append("path")
       .attr("class", "states")
@@ -173,7 +173,7 @@ function readyTrump(error,us) {
 function changeClinton() {
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton, +d.name); })
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.clinton); })
 	.await(ready);
 	
 	var x = d3.scaleLinear()
@@ -181,8 +181,8 @@ function changeClinton() {
 	.range([600,860]);
 <!-- changes the legend-->
 var color = d3.scaleThreshold()
-	.domain([10, 20, 30, 40, 50, 60])
-	.range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#3182bd", "#08519c"]);
+	.domain([10, 20, 30, 40, 50, 60, 70])
+	.range(["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", "#084594"]);
 		
 	var g = svg.append("g")
 	.attr("class", "key")
@@ -232,7 +232,7 @@ function changeTrump() {
 <!-- change the legend to fit trump -->
 var colorTrump = d3.scaleThreshold()
 	.domain([10, 20, 30, 40, 50, 60])
-	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"]);
+	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"]);
 	
 var g = svg.append("g")
 	.attr("class", "key")
