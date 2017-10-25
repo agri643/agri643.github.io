@@ -79,7 +79,7 @@ var color = d3.scaleThreshold()
 	
 <!-- because trump needs his own colour, need new bar for trump -->
 var colorTrump = d3.scaleThreshold()
-	.domain([10, 20, 30, 40, 50, 60])
+	.domain([10, 20, 30, 40, 50, 60, 70])
 	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"]);
 	
 var g = svg.append("g")
@@ -231,7 +231,7 @@ function changeTrump() {
 		
 <!-- change the legend to fit trump -->
 var colorTrump = d3.scaleThreshold()
-	.domain([10, 20, 30, 40, 50, 60])
+	.domain([10, 20, 30, 40, 50, 60, 70])
 	.range(["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d"]);
 	
 var g = svg.append("g")
