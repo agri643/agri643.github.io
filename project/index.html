@@ -159,7 +159,7 @@ function readyTrump(error,us) {
 	  .attr("fill", function(d) { return colorTrump(d.trump = vote.get(d.id)); })
       .attr("d", path)
 	.append("title")
-	  .text(function(d) { return d.trump + "%"; });
+	  .text(function(d) { return d.name + d.trump + "%"; });
 
   svg.append("path")
       .attr("class", "states")
@@ -222,7 +222,7 @@ var color = d3.scaleThreshold()
 function changeTrump() {
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump, +d.); })
 	.await(readyTrump);
 	
 	var x = d3.scaleLinear()
@@ -271,7 +271,7 @@ var g = svg.append("g")
 
 </script>
 
-    <p>Source: New Zealand Transport Agency (NZTA) Crash Analysis System</p>
+    <p>Source: <a href="https://simonrogers.net/2016/11/16/us-election-2016-how-to-download-county-level-results-data/">US 2016 Election results</a></p>
   </div>
   </body>
 </html>
