@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">lol2016 Election Results per State</h2>
+    <h2 class="text-center">2016 Election Results per State</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -157,7 +157,7 @@ function readyHome(error,us) {
     .selectAll("path")
     .data(topojson.feature(us, us.objects.states).features)
     .enter().append("path")
-	  .attr("fill", function(d) { return color(d.home= vote.get(d.other)); })
+	  .attr("fill", function(d) { return color(d.other= vote.get(d.other)); })
       .attr("d", path);
 	
   svg.append("path")
