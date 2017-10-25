@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">2016 Election Results per State</h2>
+    <h2 class="text-center">lol2016 Election Results per State</h2>
     <p>Voting % in USA</p>
     <svg width="960" height="600"></svg>
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -186,7 +186,13 @@ function readyTrump(error,us) {
       .attr("d", path);
 	
 }
-
+<!-- onclick of the home button it will execute the home function -->
+function changeHome() {
+	d3.queue()
+	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.other); })
+	.await(readyHome);
+}
 
 <!-- on click of the clinton button it will execute this function -->
 function changeClinton() {
@@ -287,12 +293,6 @@ var g = svg.append("g")
   .select(".domain")
     .remove();
 }
-<!-- onclick of the home button it will execute the home function -->
-function changeHome() {
-	d3.queue()
-	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.other); })
-	.await(readyHome);
 
 
 </script>
