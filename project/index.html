@@ -159,7 +159,7 @@ function readyTrump(error,us) {
 	  .attr("fill", function(d) { return colorTrump(d.trump = vote.get(d.id)); })
       .attr("d", path)
 	.append("title")
-	  .text(function(d) { return d.name + d.trump + "%"; });
+	  .text(function(d) { return d.name, d.trump + "%"; });
 
   svg.append("path")
       .attr("class", "states")
