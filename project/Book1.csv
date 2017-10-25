@@ -3,49 +3,49 @@ id,abb,name,clinton,trump,other
 02,AK,Alaska,36.6,51.3,1
 04,AZ,Arizona,45.1,48.7,1
 05,AR,Arkansas,33.7,60.6,1
-06,CA,California,61.7,31.6,2
-08,CO,Colorado,48.2,43.3,2
-09,CT,Connecticut,54.6,40.9,2
-10,DE,Delaware,53.4,41.9,2
+06,CA,California,61.7,31.6,0
+08,CO,Colorado,48.2,43.3,0
+09,CT,Connecticut,54.6,40.9,0
+10,DE,Delaware,53.4,41.9,0
 12,FL,Florida,47.8,49,1
 13,GA,Georgia,45.9,51,1
-15,HI,Hawaii,62.2,30,2
+15,HI,Hawaii,62.2,30,0
 16,ID,Idaho,27.5,59.3,1
-17,IL,Illinois,55.8,38.8,2
+17,IL,Illinois,55.8,38.8,0
 18,IN,Indiana,37.8,56.9,1
 19,IA,Iowa,41.7,51.1,1
 20,KS,Kansas,36.1,56.7,1
 21,KY,Kentucky,32.7,62.5,1
 22,LA,Louisiana,38.4,58.1,1
-23,ME,Maine,47.8,44.9,2
-24,MD,Maryland,60.3,33.9,2
-25,MA,Massachusetts,60,32.8,2
+23,ME,Maine,47.8,44.9,0
+24,MD,Maryland,60.3,33.9,0
+25,MA,Massachusetts,60,32.8,0
 26,MI,Michigan,47.3,47.5,1
-27,MN,Minnesota,46.4,44.9,2
+27,MN,Minnesota,46.4,44.9,0
 28,MS,Mississippi,40.1,57.9,1
 29,MO,Missouri,38.1,56.8,1
 30,MT,Montana,35.7,56.2,1
 31,NE,Nebraska,33.7,58.7,1
-32,NV,Nevada,47.9,45.5,2
-33,NH,New Hampshire,46.8,46.5,2
-34,NJ,New Jersey,55.5,41.4,2
-35,NM,New Mexico,48.3,40,2
-36,NY,New York,59,36.5,2
-37,NC,North Carolina,46.2,49.1
+32,NV,Nevada,47.9,45.5,0
+33,NH,New Hampshire,46.8,46.5,0
+34,NJ,New Jersey,55.5,41.4,0
+35,NM,New Mexico,48.3,40,0
+36,NY,New York,59,36.5,0
+37,NC,North Carolina,46.2,49.8,1
 38,ND,North Dakota,27.2,63,1
 39,OH,Ohio,43.6,51.7,1
 40,OK,Oklahoma,28.9,65.3,1
-41,OR,Oregon,50.1,39.1,2
+41,OR,Oregon,50.1,39.1,0
 42,PA,Pennsylvania,47.9,48.6,1
-44,RI,Rhode Island,54.4,38.9,2
+44,RI,Rhode Island,54.4,38.9,0
 45,SC,South Carolina,40.7,54.9,1
 46,SD,South Dakota,31.7,61.6,1
 47,TN,Tennessee,34.7,60.7,1
 48,TX,Texas,43.2,52.2,1
 49,UT,Utah,27.5,45.5,1
-50,VT,Vermont,56.7,30.3,2
-51,VA,Virginia,49.8,44.4,2
-53,WA,Washington,51.8,36.3,2
+50,VT,Vermont,56.7,30.3,0
+51,VA,Virginia,49.8,44.4,0
+53,WA,Washington,51.8,36.3,0
 54,WV,West Virginia,26.5,68.6,1
 55,WI,Wisconsin,46.5,47.2,1
 56,WY,Wyoming,21.9,68.2,1
