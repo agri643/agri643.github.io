@@ -88,6 +88,10 @@ var colorHome = d3.scaleThreshold()
 	.domain([1,2])
 	.range(["#2196f3","#ff5252"]);
 	
+var colorBar = d3.scaleThreshold()
+	.domain([10, 20, 30, 40, 50, 60, 70])
+	.range(["#d9d9d9", "#d9d9d9", "#d9d9d9", "#d9d9d9", "#d9d9d9", "#d9d9d9", "#d9d9d9"]);
+	
 var g = svg.append("g")
 	.attr("class", "key")
 	.attr("transform", "translate(0,40)");
@@ -187,7 +191,7 @@ function changeHome() {
 		.attr("height", 8)
 		.attr("x", function(d) { return x(d[0]); })
 		.attr("width", function(d) { return x(d[1]) - x(d[0]); })
-		.attr("fill", function(d) { return color(d[0]); });
+		.attr("fill", function(d) { return colorBar(d[0]); });
 	
 	g.append("text")
     .attr("class", "caption")
@@ -201,7 +205,7 @@ function changeHome() {
 	g.call(d3.axisBottom(x)
     .tickSize(13)
     .tickFormat(function(x, i) { return i ? x : x + "%"; })
-    .tickValues(color.domain()))
+    .tickValues(colorBar.domain()))
   .select(".domain")
     .remove();
 }
