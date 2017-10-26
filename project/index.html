@@ -46,7 +46,7 @@
   <div class="container">
     <h1 class="title">Geog 774</h1>
     <p>Alastair Grimson</p>
-    <h2 class="text-center">2Project</h2>
+    <h2 class="text-center">Project</h2>
     <h3 class="text-center">2016 Election Results per State</h3>
 	<p>The Map below has been generated using <a href="https://d3js.org/">D3.js</a>. It Displays the Results of the 2016 US Presidential Elections. On opening the page it will symbolise the US States that vote for the Democratic patry or the Republican Party
 		<br><br>Selectable buttons at the bottom can toggle the map to see the percentage of Democratic or Republican voters, revealing Party strongholds. Clicking overview will return you to the intial map displaying what party states voted for.
@@ -158,7 +158,7 @@ function readyTrump(error,us) {
       .attr("d", path)
 	.append("title")
 	  .text(function(d) { return d.trump + "%"; })
-	  .text(function(d) { return d.trump.name;});
+	  .text(function(d) { return d.name;});
 
   svg.append("path")
       .attr("class", "states")
@@ -267,7 +267,7 @@ var color = d3.scaleThreshold()
 function changeTrump() {
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump, +d.name); })
 	.await(readyTrump);
 	
 	var x = d3.scaleLinear()
