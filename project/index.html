@@ -157,8 +157,7 @@ function readyTrump(error,us) {
 	  .attr("fill", function(d) { return colorTrump(d.trump = vote.get(d.id)); })
       .attr("d", path)
 	.append("title")
-	  .text(function(d) { return d.trump + "%"; })
-	  .text(function(d) { return d.name;});
+	  .text(function(d) { return d.trump + "%"; });
 
   svg.append("path")
       .attr("class", "states")
@@ -267,7 +266,7 @@ var color = d3.scaleThreshold()
 function changeTrump() {
 	d3.queue()
 	.defer(d3.json, "https://d3js.org/us-10m.v1.json")
-	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump, +d.name); })
+	.defer(d3.csv, "Book1.csv", function(d) { vote.set(d.id, +d.trump); })
 	.await(readyTrump);
 	
 	var x = d3.scaleLinear()
